@@ -4,13 +4,7 @@
 # Log file
 *.log
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.ear
@@ -18,5 +12,55 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Keep static libs
+!/src/*/lib/**/*.jar
+
+# SublimeText
+*.sublime-*
+
+# Vim
+*.~
+*.swp
+*.swo
+*.swn
+*.vimrc
+
+# Eclipse / Intellij
+.idea
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.checkstyle
+.externalToolBuilders/
+*.launch
+*.iml
+*.ipr
+*.iws
+
+# OS X
+*.DS_Store
+
+# Windows
+Thumbs.db
+
+#KDE
+.directory
+
+# Gradle
+/.gradle
+
+# Maven
+/target/
+
+# Environment configuration file to be loaded with $ source .env
+.env
