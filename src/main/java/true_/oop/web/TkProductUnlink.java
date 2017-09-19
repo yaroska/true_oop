@@ -15,11 +15,11 @@ import java.net.HttpURLConnection;
 /**
  * Endpoint for /iterate
  */
-final class TkUnlinkProduct implements Take {
+final class TkProductUnlink implements Take {
 
     private final Base base;
 
-    TkUnlinkProduct(Base base) {
+    TkProductUnlink(Base base) {
         this.base = base;
     }
 
@@ -30,7 +30,7 @@ final class TkUnlinkProduct implements Take {
         Category category = base.categories().category(categoryId);
         Product product = base.products().product(productId);
 
-        // todo
+        category.remove(product);
 
         return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
     }

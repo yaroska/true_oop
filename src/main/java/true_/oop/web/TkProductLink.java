@@ -15,11 +15,11 @@ import java.net.HttpURLConnection;
 /**
  * Endpoint for /iterate
  */
-final class TkLinkProduct implements Take {
+final class TkProductLink implements Take {
 
     private final Base base;
 
-    TkLinkProduct(Base base) {
+    TkProductLink(Base base) {
         this.base = base;
     }
 
@@ -30,7 +30,7 @@ final class TkLinkProduct implements Take {
         Category category = base.categories().category(categoryId);
         Product product = base.products().product(productId);
 
-        // todo
+        category.add(product);
 
         return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
     }

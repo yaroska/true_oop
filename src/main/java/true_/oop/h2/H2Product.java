@@ -27,8 +27,7 @@ final class H2Product implements Product {
         return number;
     }
 
-    @Override
-    public String name() {
+    private String name() {
         try {
             return new JdbcSession(dBase.get())
                     .sql("SELECT name FROM product WHERE id=?")
@@ -39,8 +38,7 @@ final class H2Product implements Product {
         }
     }
 
-    @Override
-    public String desc() {
+    private String desc() {
         try {
             return new JdbcSession(dBase.get())
                     .sql("SELECT desc FROM product WHERE id=?")
@@ -51,8 +49,7 @@ final class H2Product implements Product {
         }
     }
 
-    @Override
-    public MonetaryAmount price() {
+    private MonetaryAmount price() {
         try {
             return FastMoney.of(
                     new BigDecimal(

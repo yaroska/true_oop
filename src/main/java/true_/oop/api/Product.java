@@ -6,11 +6,5 @@ public interface Product extends JsonSource {
 
     long id();
 
-    String name();
-
-    String desc();
-
-    MonetaryAmount price();
-
     Product update(String name, String desc, MonetaryAmount price);
 }
