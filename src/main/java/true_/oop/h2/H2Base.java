@@ -2,9 +2,7 @@ package true_.oop.h2;
 
 import org.h2.jdbcx.JdbcConnectionPool;
 import org.h2.tools.Server;
-import true_.oop.api.Base;
-import true_.oop.api.Categories;
-import true_.oop.api.Products;
+import true_.oop.api.*;
 
 public final class H2Base implements Base {
 
@@ -25,5 +23,10 @@ public final class H2Base implements Base {
     @Override
     public Products products() {
         return new H2Products(src);
+    }
+
+    @Override
+    public CategoryProducts categoryProducts(Category category) {
+        return new H2CategoryProducts(src, category);
     }
 }

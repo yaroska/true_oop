@@ -4,6 +4,7 @@ import com.jcabi.jdbc.JdbcSession;
 import com.jcabi.jdbc.ListOutcome;
 import com.jcabi.jdbc.Outcome;
 import com.jcabi.jdbc.SingleOutcome;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import true_.oop.api.Categories;
 import true_.oop.api.Category;
 
@@ -39,7 +40,7 @@ final class H2Categories implements Categories {
                     .select(new ListOutcome<>(rSet ->
                             new H2Category(dBase, rSet.getLong(1))));
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 
@@ -53,7 +54,7 @@ final class H2Categories implements Categories {
                             .set(parent.map(Category::id).orElse(null))
                             .insert(new SingleOutcome<>(Long.class)));
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 
@@ -65,7 +66,7 @@ final class H2Categories implements Categories {
                     .set(category.id())
                     .execute();
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            ExceptionUtils.rethrow(e);
         }
     }
 
@@ -79,7 +80,7 @@ final class H2Categories implements Categories {
             // exist
             return new H2Category(dBase, number);
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 }

@@ -4,6 +4,7 @@ import com.jcabi.jdbc.JdbcSession;
 import com.jcabi.jdbc.ListOutcome;
 import com.jcabi.jdbc.Outcome;
 import com.jcabi.jdbc.SingleOutcome;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import true_.oop.api.Product;
 import true_.oop.api.Products;
 
@@ -28,7 +29,7 @@ final class H2Products implements Products {
                     .select(new ListOutcome<>(rSet ->
                             new H2Product(dBase, rSet.getLong(1))));
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 
@@ -43,7 +44,7 @@ final class H2Products implements Products {
                             .set(price.getNumber())
                             .insert(new SingleOutcome<>(Long.class)));
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 
@@ -55,7 +56,7 @@ final class H2Products implements Products {
                     .set(product.id())
                     .execute();
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            ExceptionUtils.rethrow(e);
         }
     }
 
@@ -69,7 +70,7 @@ final class H2Products implements Products {
             // exist
             return new H2Product(dBase, number);
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
 
     }

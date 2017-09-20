@@ -8,4 +8,6 @@ public interface Base {
     Categories categories();
 
     Products products();
+
+    CategoryProducts categoryProducts(Category category);
 }

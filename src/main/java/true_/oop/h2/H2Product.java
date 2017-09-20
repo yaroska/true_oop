@@ -3,6 +3,7 @@ package true_.oop.h2;
 import com.jcabi.jdbc.JdbcSession;
 import com.jcabi.jdbc.Outcome;
 import com.jcabi.jdbc.SingleOutcome;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.javamoney.moneta.FastMoney;
 import true_.oop.api.Product;
 
@@ -34,7 +35,7 @@ final class H2Product implements Product {
                     .set(this.number)
                     .select(new SingleOutcome<>(String.class));
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 
@@ -45,7 +46,7 @@ final class H2Product implements Product {
                     .set(this.number)
                     .select(new SingleOutcome<>(String.class));
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 
@@ -59,7 +60,7 @@ final class H2Product implements Product {
                                     .select(new SingleOutcome<>(String.class))),
                     "CZK");
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 
@@ -75,7 +76,7 @@ final class H2Product implements Product {
                     .update(Outcome.VOID);
             return new H2Product(dBase, this.number);
         } catch (SQLException e) {
-            throw new IllegalStateException(e.getMessage(), e);
+            return ExceptionUtils.rethrow(e);
         }
     }
 

@@ -12,14 +12,11 @@ import true_.oop.api.Product;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-/**
- * Endpoint for /iterate
- */
-final class TkProductLink implements Take {
+final class TkCategoryProductDelete implements Take {
 
     private final Base base;
 
-    TkProductLink(Base base) {
+    TkCategoryProductDelete(Base base) {
         this.base = base;
     }
 
@@ -30,7 +27,7 @@ final class TkProductLink implements Take {
         Category category = base.categories().category(categoryId);
         Product product = base.products().product(productId);
 
-        category.add(product);
+        base.categoryProducts(category).remove(product);
 
         return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
     }
