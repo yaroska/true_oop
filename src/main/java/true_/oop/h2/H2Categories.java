@@ -4,6 +4,9 @@ import com.jcabi.jdbc.JdbcSession;
 import com.jcabi.jdbc.ListOutcome;
 import com.jcabi.jdbc.Outcome;
 import com.jcabi.jdbc.SingleOutcome;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import true_.oop.api.Categories;
 import true_.oop.api.Category;
@@ -82,5 +85,32 @@ final class H2Categories implements Categories {
         } catch (SQLException e) {
             return ExceptionUtils.rethrow(e);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        H2Categories that = (H2Categories) o;
+
+        return new EqualsBuilder()
+                .append(dBase, that.dBase)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(dBase)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("dBase", dBase)
+                .toString();
     }
 }

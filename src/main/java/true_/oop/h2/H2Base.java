@@ -1,5 +1,8 @@
 package true_.oop.h2;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.h2.jdbcx.JdbcConnectionPool;
 import org.h2.tools.Server;
 import true_.oop.api.*;
@@ -28,5 +31,32 @@ public final class H2Base implements Base {
     @Override
     public CategoryProducts categoryProducts(Category category) {
         return new H2CategoryProducts(src, category);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        H2Base h2Base = (H2Base) o;
+
+        return new EqualsBuilder()
+                .append(src, h2Base.src)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(src)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("src", src)
+                .toString();
     }
 }

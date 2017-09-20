@@ -3,6 +3,9 @@ package true_.oop.h2;
 import com.jcabi.jdbc.JdbcSession;
 import com.jcabi.jdbc.Outcome;
 import com.jcabi.jdbc.SingleOutcome;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import true_.oop.api.Category;
 
@@ -73,5 +76,38 @@ final class H2Category implements Category {
                 .add("name", name());
         parent().ifPresent(parent -> json.add("parent_id", parent.id()));
         return json.build();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        H2Category that = (H2Category) o;
+
+        return new EqualsBuilder()
+                .append(number, that.number)
+                .append(dBase, that.dBase)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(dBase)
+                .append(number)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        ToStringBuilder builder = new ToStringBuilder(this)
+                .append("dBase", dBase)
+                .append("number", number)
+                .append("name", name());
+        parent().ifPresent(p ->
+                builder.append("parent.number", p.id()));
+        return builder.toString();
     }
 }

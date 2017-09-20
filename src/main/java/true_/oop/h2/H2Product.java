@@ -3,6 +3,9 @@ package true_.oop.h2;
 import com.jcabi.jdbc.JdbcSession;
 import com.jcabi.jdbc.Outcome;
 import com.jcabi.jdbc.SingleOutcome;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.javamoney.moneta.FastMoney;
 import true_.oop.api.Product;
@@ -88,5 +91,38 @@ final class H2Product implements Product {
                 .add("description", desc())
                 .add("price", price().toString())
                 .build();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        H2Product h2Product = (H2Product) o;
+
+        return new EqualsBuilder()
+                .append(number, h2Product.number)
+                .append(dBase, h2Product.dBase)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(dBase)
+                .append(number)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("dBase", dBase)
+                .append("number", number)
+                .append("name", name())
+                .append("desc", desc())
+                .append("price", price())
+                .toString();
     }
 }

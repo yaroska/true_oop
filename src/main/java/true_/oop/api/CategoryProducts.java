@@ -2,7 +2,7 @@ package true_.oop.api;
 
 import java.util.List;
 
-public interface CategoryProducts {
+public interface CategoryProducts extends JsonSource {
 
     List<Product> iterate();
 
