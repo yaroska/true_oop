@@ -9,7 +9,7 @@ import true_.oop.web.TkApp;
 /**
  * Main class
  */
-public final class Warehouse {
+public final class Entry {
 
     public static void main(String[] args) throws Exception {
 
@@ -20,7 +20,7 @@ public final class Warehouse {
     /**
      * Utility class.
      */
-    private Warehouse() {
+    private Entry() {
         throw new IllegalStateException("Utility class");
     }
 }

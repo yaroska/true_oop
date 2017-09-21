@@ -12,14 +12,15 @@ import true_.oop.api.CategoryProducts;
 import true_.oop.api.Product;
 
 import javax.json.JsonStructure;
+import javax.sql.DataSource;
 import java.util.List;
 
 public class H2CategoryProducts implements CategoryProducts {
 
-    private final H2Source dBase;
+    private final DataSource dBase;
     private final Category category;
 
-    public H2CategoryProducts(H2Source dBase, Category category) {
+    public H2CategoryProducts(DataSource dBase, Category category) {
         this.dBase = dBase;
         this.category = category;
     }
@@ -27,7 +28,7 @@ public class H2CategoryProducts implements CategoryProducts {
     @Override
     public List<Product> iterate() {
         try {
-            return new JdbcSession(this.dBase.get())
+            return new JdbcSession(this.dBase)
                     .sql("SELECT product_id FROM category_product WHERE category_id = ?")
                     .set(category.id())
                     .select(new ListOutcome<>(rSet ->
@@ -40,10 +41,10 @@ public class H2CategoryProducts implements CategoryProducts {
     @Override
     public void add(Product product) {
         try {
-            new JdbcSession(this.dBase.get())
+            new JdbcSession(this.dBase)
                     .sql("INSERT INTO category_product (category_id, product_id) VALUES (?, ?)")
                     .set(category.id())
-                    .set(product.id())
+                    .set(product.number())
                     .insert(Outcome.VOID);
         } catch (Exception e) {
             ExceptionUtils.rethrow(e);
@@ -53,10 +54,10 @@ public class H2CategoryProducts implements CategoryProducts {
     @Override
     public void remove(Product product) {
         try {
-            new JdbcSession(this.dBase.get())
+            new JdbcSession(this.dBase)
                     .sql("DELETE FROM category_product WHERE category_id=? AND product_id=?")
                     .set(category.id())
-                    .set(product.id())
+                    .set(product.number())
                     .execute();
         } catch (Exception e) {
             ExceptionUtils.rethrow(e);

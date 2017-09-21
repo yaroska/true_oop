@@ -14,15 +14,16 @@ import true_.oop.api.Category;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonStructure;
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 final class H2Categories implements Categories {
 
-    private final H2Source dBase;
+    private final DataSource dBase;
 
-    H2Categories(H2Source dBase) {
+    H2Categories(DataSource dBase) {
         this.dBase = dBase;
     }
 
@@ -38,7 +39,7 @@ final class H2Categories implements Categories {
     @Override
     public List<Category> iterate() {
         try {
-            return new JdbcSession(this.dBase.get())
+            return new JdbcSession(this.dBase)
                     .sql("SELECT id FROM category")
                     .select(new ListOutcome<>(rSet ->
                             new H2Category(dBase, rSet.getLong(1))));
@@ -51,7 +52,7 @@ final class H2Categories implements Categories {
     public Category add(String name, Optional<Category> parent) {
         try {
             return new H2Category(dBase,
-                    new JdbcSession(this.dBase.get())
+                    new JdbcSession(this.dBase)
                             .sql("INSERT INTO category (name, parent_id) VALUES (?, ?)")
                             .set(name)
                             .set(parent.map(Category::id).orElse(null))
@@ -64,8 +65,8 @@ final class H2Categories implements Categories {
     @Override
     public void delete(Category category) {
         try {
-            new JdbcSession(this.dBase.get())
-                    .sql("DELETE FROM category WHERE id = ?")
+            new JdbcSession(this.dBase)
+                    .sql("DELETE FROM category WHERE id=?")
                     .set(category.id())
                     .execute();
         } catch (SQLException e) {
@@ -76,8 +77,8 @@ final class H2Categories implements Categories {
     @Override
     public Category category(long number) {
         try {
-            new JdbcSession(this.dBase.get())
-                    .sql("SELECT id FROM category WHERE id = ?")
+            new JdbcSession(this.dBase)
+                    .sql("SELECT id FROM category WHERE id=?")
                     .set(number)
                     .select(Outcome.NOT_EMPTY);
             // exist

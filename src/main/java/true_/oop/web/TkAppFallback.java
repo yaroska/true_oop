@@ -31,7 +31,7 @@ final class TkAppFallback extends TkWrap {
                         new FbStatus(
                                 HttpURLConnection.HTTP_NOT_FOUND,
                                 new RsWithStatus(
-                                        new RsText("page not found"),
+                                        new RsText("endpoint with this path not found"),
                                         HttpURLConnection.HTTP_NOT_FOUND
                                 )
                         ),

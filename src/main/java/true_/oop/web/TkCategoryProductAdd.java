@@ -12,6 +12,9 @@ import true_.oop.api.Product;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+/**
+ * Add product to category.
+ */
 final class TkCategoryProductAdd implements Take {
 
     private final Base base;

@@ -8,6 +8,9 @@ import true_.oop.api.Base;
 
 import java.io.IOException;
 
+/**
+ * List of Categories.
+ */
 final class TkCategories implements Take {
 
     private final Base base;

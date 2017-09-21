@@ -12,15 +12,16 @@ import true_.oop.api.Category;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonStructure;
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Optional;
 
 final class H2Category implements Category {
 
-    private final H2Source dBase;
+    private final DataSource dBase;
     private final long number;
 
-    H2Category(H2Source dBase, long id) {
+    H2Category(DataSource dBase, long id) {
         this.dBase = dBase;
         this.number = id;
     }
@@ -32,7 +33,7 @@ final class H2Category implements Category {
 
     private String name() {
         try {
-            return new JdbcSession(dBase.get())
+            return new JdbcSession(dBase)
                     .sql("SELECT name FROM category WHERE id=?")
                     .set(this.number)
                     .select(new SingleOutcome<>(String.class));
@@ -43,7 +44,7 @@ final class H2Category implements Category {
 
     private Optional<Category> parent() {
         try {
-            return Optional.ofNullable(new JdbcSession(dBase.get())
+            return Optional.ofNullable(new JdbcSession(dBase)
                     .sql("SELECT parent_id FROM category WHERE id=?")
                     .set(this.number)
                     .select(new SingleOutcome<>(Long.class, true)))
@@ -57,7 +58,7 @@ final class H2Category implements Category {
     @Override
     public Category update(String name, Optional<Category> parent) {
         try {
-            new JdbcSession(dBase.get())
+            new JdbcSession(dBase)
                     .sql("UPDATE category SET name=?, parent_id=? WHERE id=?")
                     .set(name)
                     .set(parent.map(Category::id).orElse(null))
@@ -72,7 +73,7 @@ final class H2Category implements Category {
     @Override
     public JsonStructure toJson() {
         JsonObjectBuilder json = Json.createObjectBuilder()
-                .add("id", number)
+                .add("number", number)
                 .add("name", name());
         parent().ifPresent(parent -> json.add("parent_id", parent.id()));
         return json.build();

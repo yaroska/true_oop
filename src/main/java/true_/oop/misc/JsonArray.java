@@ -7,7 +7,10 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonStructure;
 import java.util.Collection;
 
-public class JsonArray implements JsonSource {
+/**
+ * Work with JSON array.
+ */
+public final class JsonArray implements JsonSource {
 
     private final Collection<? extends JsonSource> col;
 
@@ -15,6 +18,11 @@ public class JsonArray implements JsonSource {
         this.col = col;
     }
 
+    /**
+     * Creates JSON representation of given collection.
+     *
+     * @return JSON structure.
+     */
     @Override
     public JsonStructure toJson() {
         JsonArrayBuilder result = Json.createArrayBuilder();

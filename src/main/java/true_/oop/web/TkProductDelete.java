@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 /**
- * Endpoint for /iterate
+ * Delete product.
  */
 final class TkProductDelete implements Take {
 
@@ -24,7 +24,7 @@ final class TkProductDelete implements Take {
 
     @Override
     public Response act(Request req) throws IOException {
-        long number = Long.parseLong(((RqRegex) req).matcher().group("id"));
+        long number = Long.parseLong(((RqRegex) req).matcher().group("number"));
         Product product = base.products().product(number);
 
         base.products().delete(product);

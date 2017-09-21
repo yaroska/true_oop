@@ -13,21 +13,22 @@ import true_.oop.api.Products;
 
 import javax.json.JsonStructure;
 import javax.money.MonetaryAmount;
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 
 final class H2Products implements Products {
 
-    private final H2Source dBase;
+    private final DataSource dBase;
 
-    H2Products(H2Source dBase) {
+    H2Products(DataSource dBase) {
         this.dBase = dBase;
     }
 
     @Override
     public List<Product> iterate() {
         try {
-            return new JdbcSession(this.dBase.get())
+            return new JdbcSession(this.dBase)
                     .sql("SELECT id FROM product")
                     .select(new ListOutcome<>(rSet ->
                             new H2Product(dBase, rSet.getLong(1))));
@@ -40,7 +41,7 @@ final class H2Products implements Products {
     public Product add(String name, String desc, MonetaryAmount price) {
         try {
             return new H2Product(dBase,
-                    new JdbcSession(this.dBase.get())
+                    new JdbcSession(this.dBase)
                             .sql("INSERT INTO product (name, desc, price) VALUES (?, ?, ?)")
                             .set(name)
                             .set(desc)
@@ -54,9 +55,9 @@ final class H2Products implements Products {
     @Override
     public void delete(Product product) {
         try {
-            new JdbcSession(this.dBase.get())
-                    .sql("DELETE FROM product WHERE id = ?")
-                    .set(product.id())
+            new JdbcSession(this.dBase)
+                    .sql("DELETE FROM product WHERE id=?")
+                    .set(product.number())
                     .execute();
         } catch (SQLException e) {
             ExceptionUtils.rethrow(e);
@@ -66,8 +67,8 @@ final class H2Products implements Products {
     @Override
     public Product product(long number) {
         try {
-            new JdbcSession(this.dBase.get())
-                    .sql("SELECT id FROM product WHERE id = ?")
+            new JdbcSession(this.dBase)
+                    .sql("SELECT id FROM product WHERE id=?")
                     .set(number)
                     .select(Outcome.NOT_EMPTY);
             // exist

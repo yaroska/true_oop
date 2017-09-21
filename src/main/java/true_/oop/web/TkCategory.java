@@ -11,7 +11,7 @@ import true_.oop.api.Category;
 import java.io.IOException;
 
 /**
- * Endpoint for /iterate
+ * Get category by ID.
  */
 final class TkCategory implements Take {
 
@@ -23,7 +23,7 @@ final class TkCategory implements Take {
 
     @Override
     public Response act(Request req) throws IOException {
-        long number = Long.parseLong(((RqRegex) req).matcher().group("id"));
+        long number = Long.parseLong(((RqRegex) req).matcher().group("number"));
         Category category = base.categories().category(number);
 
         try {

@@ -12,6 +12,9 @@ import true_.oop.api.Product;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+/**
+ * Remove product from category.
+ */
 final class TkCategoryProductDelete implements Take {
 
     private final Base base;

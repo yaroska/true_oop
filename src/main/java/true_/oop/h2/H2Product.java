@@ -13,27 +13,28 @@ import true_.oop.api.Product;
 import javax.json.Json;
 import javax.json.JsonStructure;
 import javax.money.MonetaryAmount;
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
 final class H2Product implements Product {
 
-    private final H2Source dBase;
+    private final DataSource dBase;
     private final long number;
 
-    H2Product(H2Source dBase, long number) {
+    H2Product(DataSource dBase, long number) {
         this.dBase = dBase;
         this.number = number;
     }
 
     @Override
-    public long id() {
+    public long number() {
         return number;
     }
 
     private String name() {
         try {
-            return new JdbcSession(dBase.get())
+            return new JdbcSession(dBase)
                     .sql("SELECT name FROM product WHERE id=?")
                     .set(this.number)
                     .select(new SingleOutcome<>(String.class));
@@ -44,7 +45,7 @@ final class H2Product implements Product {
 
     private String desc() {
         try {
-            return new JdbcSession(dBase.get())
+            return new JdbcSession(dBase)
                     .sql("SELECT desc FROM product WHERE id=?")
                     .set(this.number)
                     .select(new SingleOutcome<>(String.class));
@@ -57,7 +58,7 @@ final class H2Product implements Product {
         try {
             return FastMoney.of(
                     new BigDecimal(
-                            new JdbcSession(dBase.get())
+                            new JdbcSession(dBase)
                                     .sql("SELECT price FROM product WHERE id=?")
                                     .set(this.number)
                                     .select(new SingleOutcome<>(String.class))),
@@ -70,7 +71,7 @@ final class H2Product implements Product {
     @Override
     public Product update(String name, String desc, MonetaryAmount price) {
         try {
-            new JdbcSession(dBase.get())
+            new JdbcSession(dBase)
                     .sql("UPDATE product SET name=?, desc=?, price=? WHERE id=?")
                     .set(name)
                     .set(desc)
@@ -86,7 +87,7 @@ final class H2Product implements Product {
     @Override
     public JsonStructure toJson() {
         return Json.createObjectBuilder()
-                .add("id", number)
+                .add("number", number)
                 .add("name", name())
                 .add("description", desc())
                 .add("price", price().toString())

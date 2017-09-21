@@ -15,6 +15,9 @@ import javax.json.JsonReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+/**
+ * Update product.
+ */
 final class TkProductUpdate implements Take {
 
     private final Base base;
@@ -26,7 +29,7 @@ final class TkProductUpdate implements Take {
     @Override
     public Response act(Request req) throws IOException {
         try {
-            long number = Long.parseLong(((RqRegex) req).matcher().group("id"));
+            long number = Long.parseLong(((RqRegex) req).matcher().group("number"));
             Product product = base.products().product(number);
 
             JsonReader reader = Json.createReader(req.body());

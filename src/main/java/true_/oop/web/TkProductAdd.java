@@ -15,6 +15,9 @@ import javax.money.MonetaryAmount;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+/**
+ * Create product.
+ */
 final class TkProductAdd implements Take {
 
     private final Base base;

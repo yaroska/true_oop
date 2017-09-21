@@ -14,6 +14,9 @@ import javax.json.JsonReader;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Update category.
+ */
 final class TkCategoryUpdate implements Take {
 
     private final Base base;
@@ -25,7 +28,7 @@ final class TkCategoryUpdate implements Take {
     @Override
     public Response act(Request req) throws IOException {
         try {
-            long number = Long.parseLong(((RqRegex) req).matcher().group("id"));
+            long number = Long.parseLong(((RqRegex) req).matcher().group("number"));
             Category category = base.categories().category(number);
 
             JsonReader reader = Json.createReader(req.body());

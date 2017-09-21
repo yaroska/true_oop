@@ -13,6 +13,9 @@ import javax.json.JsonReader;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Create category.
+ */
 final class TkCategoryAdd implements Take {
 
     private final Base base;

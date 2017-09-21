@@ -11,7 +11,7 @@ import true_.oop.api.Product;
 import java.io.IOException;
 
 /**
- * Endpoint for /iterate
+ * Get product.
  */
 final class TkProduct implements Take {
 
@@ -23,7 +23,7 @@ final class TkProduct implements Take {
 
     @Override
     public Response act(Request req) throws IOException {
-        long number = Long.parseLong(((RqRegex) req).matcher().group("id"));
+        long number = Long.parseLong(((RqRegex) req).matcher().group("number"));
         Product product = base.products().product(number);
 
         try {

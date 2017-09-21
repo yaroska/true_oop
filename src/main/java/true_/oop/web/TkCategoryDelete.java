@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 /**
- * Endpoint for /iterate
+ * Delete category.
  */
 final class TkCategoryDelete implements Take {
 
@@ -24,7 +24,7 @@ final class TkCategoryDelete implements Take {
 
     @Override
     public Response act(Request req) throws IOException {
-        long number = Long.parseLong(((RqRegex) req).matcher().group("id"));
+        long number = Long.parseLong(((RqRegex) req).matcher().group("number"));
         Category category = base.categories().category(number);
 
         base.categories().delete(category);
