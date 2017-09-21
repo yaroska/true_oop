@@ -25,23 +25,28 @@ $ mvn clean integration-test -Phit-refresh -Dport=8080
 #### How to use
 Now in browser open `localhost:8080/categories` to see list of categories.
 
-GET `localhost:8080/categories` - to list all categories
-POST/PUT `localhost:8080/categories` with`{name:foo, parent_id=1}` - to create new category. 
-Parent ID is optional here.
+- `localhost:8080/categories`
+  - GET to list all categories
+  - POST/PUT`{name:foo, parent_id=1}` to create new category. Parent ID is optional here.
 
-GET `/categories/ID` - shows category with ID
-DETELE `/categories/ID` - to delete category with ID
-POST/PUT `/categories/ID` - with`{name:foo, parent_id=1}` to update category with ID. 
+- `/categories/ID`
+  - GET shows category with ID
+  - DELETE to delete category with ID
+  - POST/PUT `{name:foo, parent_id=1}` to update category with ID. 
 Be aware to not make dependency circles within categories tree structure.
 
-GET `/products` - list of all products
-POST,PUT `/products' with `{name:foo, desc:foo_desc, price:12.56}`- add new product
-                                        
-GET `/products/ID` - to get product with ID
-POST/PUT `/products/ID` with `{name:foo, desc:foo_desc, price:12.56}` - to update product with ID 
-DELETE `/products/ID` - to delete product with ID
-                                        
-GET `/categories/ID/products` - to get list of products in category with ID
+- `/products`
+  - GET lists all products
+  - POST/PUT `{name:foo, desc:foo_desc, price:12.56}` adds new product
 
-POST/PUT `/categories/$CATEGORY_ID/products/$PRODUCT_ID` to assign product with PRODUCT_ID to category with CATEGORY_ID
-DELETE `/categories/$CATEGORY_ID/products/$PRODUCT_ID` to remove product with PRODUCT_ID from category with CATEGORY_ID
+- `/products/ID`                                        
+  - GET shows product with ID
+  - POST/PUT `{name:foo, desc:foo_desc, price:12.56}` updates product with ID 
+  - DELETE to delete product with ID
+  
+- `/categories/ID/products`                                        
+  - GET lists products in category with ID
+
+- `/categories/$CATEGORY_ID/products/$PRODUCT_ID`
+  - POST/PUT  to assign product with PRODUCT_ID to category with CATEGORY_ID
+  - DELETE to remove product with PRODUCT_ID from category with CATEGORY_ID
