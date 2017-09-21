@@ -18,7 +18,7 @@ public interface Products extends JsonSource {
     /**
      * Add new product.
      * @param name Product name.
-     * @param desc Product descrition.
+     * @param desc Product description.
      * @param price Product price.
      * @return Created product.
      */

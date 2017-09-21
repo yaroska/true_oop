@@ -6,7 +6,7 @@ import javax.json.Json;
 import javax.json.JsonStructure;
 import javax.money.MonetaryAmount;
 
-public class FkProduct implements Product {
+final class FkProduct implements Product {
 
     @Override
     public long number() {

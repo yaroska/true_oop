@@ -6,7 +6,7 @@ import javax.json.Json;
 import javax.json.JsonStructure;
 import java.util.Optional;
 
-public class FkCategory implements Category {
+final class FkCategory implements Category {
 
     @Override
     public long id() {

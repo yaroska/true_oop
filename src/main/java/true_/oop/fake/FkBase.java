@@ -2,7 +2,7 @@ package true_.oop.fake;
 
 import true_.oop.api.*;
 
-public class FkBase implements Base {
+public final class FkBase implements Base {
 
     @Override
     public Categories categories() {

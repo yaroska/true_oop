@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class FkCategories implements Categories {
+final class FkCategories implements Categories {
 
     @Override
     public List<Category> iterate() {

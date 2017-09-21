@@ -9,7 +9,7 @@ import javax.money.MonetaryAmount;
 import java.util.Collections;
 import java.util.List;
 
-public class FkProducts implements Products {
+final class FkProducts implements Products {
 
     @Override
     public List<Product> iterate() {

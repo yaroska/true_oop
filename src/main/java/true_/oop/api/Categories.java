@@ -25,7 +25,7 @@ public interface Categories extends JsonSource {
     Category add(String name, Optional<Category> parent);
 
     /**
-     * Delete caterogy.
+     * Delete category.
      * @param category Category to be deleted.
      */
     void delete(Category category);

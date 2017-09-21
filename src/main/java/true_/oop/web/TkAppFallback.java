@@ -12,7 +12,6 @@ import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
 import org.takes.tk.TkWrap;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 
 /**
@@ -48,7 +47,7 @@ final class TkAppFallback extends TkWrap {
         );
     }
 
-    private static Response fatal(final RqFallback req) throws IOException {
+    private static Response fatal(final RqFallback req) {
         return new RsWithStatus(
                 new RsText(ExceptionUtils.getStackTrace(req.throwable())),
                 HttpURLConnection.HTTP_INTERNAL_ERROR

@@ -9,9 +9,10 @@ import javax.json.JsonStructure;
 import java.util.Collections;
 import java.util.List;
 
-public class FkCategoryProducts implements CategoryProducts {
+final class FkCategoryProducts implements CategoryProducts {
 
-    public FkCategoryProducts(Category category) {
+    @SuppressWarnings("unused")
+    FkCategoryProducts(Category category) {
     }
 
     @Override
