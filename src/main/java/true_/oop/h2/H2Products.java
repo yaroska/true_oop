@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import true_.oop.api.Product;
 import true_.oop.api.Products;
+import true_.oop.misc.JsonArray;
 
 import javax.json.JsonStructure;
 import javax.money.MonetaryAmount;
@@ -80,7 +81,7 @@ final class H2Products implements Products {
 
     @Override
     public JsonStructure toJson() {
-        return new true_.oop.misc.JsonArray(iterate()).toJson();
+        return new JsonArray(iterate()).toJson();
     }
 
     @Override

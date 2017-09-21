@@ -27,7 +27,7 @@ public final class H2Base implements Base {
 
     @Override
     public Products products() {
-        return new H2Products(src);
+        return new ConstH2Products(src, new H2Products(src));
     }
 
     @Override

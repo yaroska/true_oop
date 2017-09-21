@@ -10,17 +10,18 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import true_.oop.api.Category;
 import true_.oop.api.CategoryProducts;
 import true_.oop.api.Product;
+import true_.oop.misc.JsonArray;
 
 import javax.json.JsonStructure;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class H2CategoryProducts implements CategoryProducts {
+final class H2CategoryProducts implements CategoryProducts {
 
     private final DataSource dBase;
     private final Category category;
 
-    public H2CategoryProducts(DataSource dBase, Category category) {
+    H2CategoryProducts(DataSource dBase, Category category) {
         this.dBase = dBase;
         this.category = category;
     }
@@ -66,7 +67,7 @@ public class H2CategoryProducts implements CategoryProducts {
 
     @Override
     public JsonStructure toJson() {
-        return new true_.oop.misc.JsonArray(iterate()).toJson();
+        return new JsonArray(iterate()).toJson();
     }
 
     @Override
