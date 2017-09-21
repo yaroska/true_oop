@@ -1,10 +1,10 @@
-###Naive implementation of pure OOP ideas of [Yegor Bugayenko](http://www.yegor256.com/). 
+### Naive implementation of pure OOP ideas of [Yegor Bugayenko](http://www.yegor256.com/). 
 
 **Warehouse** is web app with REST interfaces and **without** ORM. Because as everybody knows 
 [ORM Is an Offensive Anti-Pattern](https://dzone.com/articles/orm-offensive-anti-pattern).
 
 
-###How to run
+#### How to run
 
 First of all you'll need to init H2 database schema. You can try to do it this way:
 
@@ -22,7 +22,7 @@ Now you can run sample warehouse app from command line:
 $ mvn clean integration-test -Phit-refresh -Dport=8080
 ```
 
-###How to use
+#### How to use
 Now in browser open `localhost:8080/categories` to see list of categories.
 
 GET `localhost:8080/categories` - to list all categories
