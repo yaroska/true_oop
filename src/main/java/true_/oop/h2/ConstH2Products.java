@@ -2,6 +2,9 @@ package true_.oop.h2;
 
 import com.jcabi.jdbc.JdbcSession;
 import com.jcabi.jdbc.ListOutcome;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.javamoney.moneta.FastMoney;
 import true_.oop.api.Product;
@@ -78,5 +81,35 @@ final class ConstH2Products implements Products {
     @Override
     public JsonStructure toJson() {
         return new JsonArray(iterate()).toJson();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ConstH2Products that = (ConstH2Products) o;
+
+        return new EqualsBuilder()
+                .append(dBase, that.dBase)
+                .append(origin, that.origin)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(dBase)
+                .append(origin)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("dBase", dBase)
+                .append("origin", origin)
+                .toString();
     }
 }
