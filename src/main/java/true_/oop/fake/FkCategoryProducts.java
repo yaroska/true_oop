@@ -21,7 +21,7 @@ final class FkCategoryProducts implements CategoryProducts {
     }
 
     @Override
-    public void add(Product product) {
+    public void add(Product... products) {
         // noop
     }
 

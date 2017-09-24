@@ -44,7 +44,8 @@ public final class TkApp extends TkWrap {
                                                 new FkMethods("DELETE", new TkProductDelete(base))
                                         )),
                                         new FkRegex("/categories/(?<number>[^/]+)/products", new TkFork(
-                                                new FkMethods("GET", new TkCategoryProducts(base))
+                                                new FkMethods("GET", new TkCategoryProducts(base)),
+                                                new FkMethods("POST,PUT", new TkCategoryProductsAdd(base))
                                         )),
                                         new FkRegex("/categories/(?<ctgId>[^/]+)/products/(?<prdId>[^/]+)", new TkFork(
                                                 new FkMethods("POST,PUT", new TkCategoryProductAdd(base)),

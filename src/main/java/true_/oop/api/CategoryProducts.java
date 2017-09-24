@@ -16,9 +16,9 @@ public interface CategoryProducts extends JsonSource {
 
     /**
      * Add product to category.
-     * @param product Product to add.
+     * @param products Products to add.
      */
-    void add(Product product);
+    void add(Product... products);
 
     /**
      * Remove product from category.

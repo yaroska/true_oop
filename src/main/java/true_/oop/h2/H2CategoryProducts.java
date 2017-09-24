@@ -14,6 +14,7 @@ import true_.oop.misc.JsonArray;
 
 import javax.json.JsonStructure;
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.List;
 
 final class H2CategoryProducts implements CategoryProducts {
@@ -40,16 +41,20 @@ final class H2CategoryProducts implements CategoryProducts {
     }
 
     @Override
-    public void add(Product product) {
-        try {
-            new JdbcSession(this.dBase)
-                    .sql("INSERT INTO category_product (category_id, product_id) VALUES (?, ?)")
-                    .set(category.id())
-                    .set(product.number())
-                    .insert(Outcome.VOID);
-        } catch (Exception e) {
-            ExceptionUtils.rethrow(e);
-        }
+    public void add(Product... products) {
+        new Txn(dBase).call(session -> {
+            for (Product product : products) {
+                try {
+                    session.sql("INSERT INTO category_product (category_id, product_id) VALUES (?, ?)")
+                            .set(category.id())
+                            .set(product.number())
+                            .insert(Outcome.VOID);
+                } catch (SQLException e) {
+                    ExceptionUtils.rethrow(e);
+                }
+            }
+            return null;
+        });
     }
 
     @Override
